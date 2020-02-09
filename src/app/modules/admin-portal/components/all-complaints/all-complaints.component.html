@@ -1,0 +1,145 @@
+<div class="wrapper">
+        <div class="container-fluid">
+                   <div class="row mt-3">
+                        <div class="col-12">
+                            <div class="card-box table-responsive">
+                                
+                                <div class="card-body">
+
+                                        <h4 class="m-t-0 header-title"><b>All Complaints</b></h4>
+                              
+
+                                        <table class="table table-striped table-hover table-bordered" [mfData]="complaintData" #mf="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Username</th>
+                                                        <th >Category </th>
+                                                        <th >Description</th>
+                                                        <th>Status</th>
+                                                        <th >Created On</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    
+                                                    <tr *ngFor="let complaint of mf.data"  >
+                                                           
+                                                            <td scope="row" >{{ complaint.id}}</td>
+                                                            <td scope="row" ><a [routerLink]="['/complaint-detail']" [queryParams]="{ id: complaint.id}">{{ complaint.studentName}}</a></td>
+                                                            <td scope="row" >{{ complaint.name}}</td>
+                                                        <td scope="row">{{ complaint.description}}</td>
+                                                        <td scope="row">{{ complaint.created_at | date: 'dd/MM/yyyy' }}</td>
+                                                        <td scope="row" align="center">
+                                                                <div *ngIf="complaint.status ==  'Pending'">
+                                                                    <span class="label label-inverse">{{complaint.status}}</span>
+                                                                </div>
+                                            
+                                                                <div *ngIf="complaint.status == 'Processing'">
+                                                                    <span class="label label-info">{{complaint.status }}</span>
+                                                                </div>
+                                            
+                                                                <div *ngIf="complaint.status == 'Resolved'">
+                                                                    <span class="label label-success">{{complaint.status}}</span>
+                                                                </div>
+
+                                                                <div *ngIf="complaint.status == 'Retracted'">
+                                                                        <span class="label label-danger">{{complaint.status}}</span>
+                                                                    </div>
+                                                          
+                                                        </td>
+                                                        <td scope="row" align="center">
+                                                                <div *ngIf="complaint.status == 'Pending'">
+                                                                        <button  data-toggle="modal" data-target="#processComplaint" class="btn btn-info btn-sm text-center mr-2" (click)="changeStatus(complaint.id)">
+                                                                                <i class="fa  fa-refresh"></i>
+                                                                        </button>
+ 
+                                                                        <button  data-toggle="modal" data-target="#resolveComplaint" class="btn btn-success btn-sm text-center mr-2" (click)="changeStatus(complaint.id)">
+                                                                             <i class="fa fa-check-circle"></i>
+                                                                     </button>
+                                                                </div>
+                                                
+                                                
+                                                                <ng-template #elseBlock>
+                                                
+                                                                        <button  class="btn btn-danger btn-sm text-center mr-2"  disabled>
+                                                                                <i class="fa fa-times-circle"></i> 
+                                                                        </button>
+                                                                                
+                                                                </ng-template>
+                                                        </td>
+                                                        
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td colspan="7">
+                                                            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15,25]"></mfBootstrapPaginator>
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                            
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end row -->
+
+                    </div>
+</div>
+
+
+                    <div class="modal fade " id="processComplaint" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog ">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title mt-0">Processing Message</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" #closeModal>×</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form (ngSubmit)="statusForm.valid  && processComplaint()" [formGroup]="statusForm" >
+                     
+                                             <div class="form-group-custom"  [ngClass]="{ 'has-error': statusForm.get('response').touched && !statusForm.get('response').valid}">
+                                                     <label for="" class="label-control">Response</label>
+                                                     <textarea name="response" formControlName="response" id="" cols="30" rows="5" class="form-control bg-light" placeholder="Please enter response">
+                     
+                                                         <input type="hidden" formControlName="status" value="Processing">
+                     
+                                                     </textarea>
+                                                     <span *ngIf="statusForm.get('response').touched && !statusForm.get('response').valid" class="error" style="margin-left:160px">Response is required</span>
+                                                 </div>
+                     
+                                                    <button class="btn btn-block btn-success" type="submit">Submit</button>
+                                        </form>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
+                     
+                     
+                        <div class="modal fade " id="resolveComplaint" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                             <div class="modal-dialog ">
+                                 <div class="modal-content">
+                                     <div class="modal-header">
+                                         <h4 class="modal-title mt-0">Resolving Message</h4>
+                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" #closeModal>×</button>
+                                     </div>
+                                     <div class="modal-body">
+                                         <form (ngSubmit)="statusForm.valid  && resolveComplaint()" [formGroup]="statusForm" >
+                      
+                                              <div class="form-group-custom"  [ngClass]="{ 'has-error': statusForm.get('response').touched && !statusForm.get('response').valid}">
+                                                      <label for="" class="label-control">Respone</label>
+                                                      <textarea name="response" formControlName="response" id="" cols="30" rows="5" class="form-control bg-light" placeholder="Please enter response">
+                      
+                                                      </textarea>
+                                                      
+                                                      <input type="hidden" formControlName="status" value="Resolved">
+                                                      <span *ngIf="statusForm.get('response').touched && !statusForm.get('response').valid" class="error" style="margin-left:160px">Response is required</span>
+                                                  </div>
+                      
+                                                     <button class="btn btn-block btn-success" type="submit">Submit</button>
+                                         </form>
+                                     </div>
+                                 </div><!-- /.modal-content -->
+                             </div><!-- /.modal-dialog -->
+                         </div>

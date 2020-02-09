@@ -1,0 +1,56 @@
+<div class="wrapper">
+        <div class="container-fluid">
+                   <div class="row mt-3">
+                        <div class="col-12">
+                            <div class="card-box table-responsive">
+                                
+                                <div class="card-body">
+
+                                        <h4 class="m-t-0 header-title"><b>Processing Complaints</b></h4>
+                              
+
+                                        <table class="table table-striped table-hover table-bordered" [mfData]="complaintData" #mf="mfDataTable" [mfRowsOnPage]="10" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Username</th>
+                                                        <th >Category </th>
+                                                        <th >Description</th>
+                                                        <th >Created On</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    
+                                                    <tr *ngFor="let complaint of mf.data"  >
+                                                           
+                                                            <td scope="row" >{{ complaint.id}}</td>
+                                                            <td scope="row" ><a [routerLink]="['/complaint-detail']" [queryParams]="{ id: complaint.id}">{{ complaint.studentName}}</a></td>
+                                                            <td scope="row" >{{ complaint.name}}</td>
+                                                        <td scope="row">{{ complaint.description}}</td>
+                                                        <td scope="row">{{ complaint.created_at | date: 'dd/MM/yyyy' }}</td>
+                                                   
+                                                      
+                                                        
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td colspan="7">
+                                                            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15,25]"></mfBootstrapPaginator>
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                            
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end row -->
+
+                    </div>
+</div>
+
+
+                   
+                     
+                      

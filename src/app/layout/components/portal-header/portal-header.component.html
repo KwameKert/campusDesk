@@ -1,0 +1,48 @@
+<div class="topbar-main">
+        <div class="container-fluid">
+
+            <!-- Logo container-->
+            <div class="logo">
+                <!-- Text Logo -->
+                <!--<a href="index.html" class="logo">-->
+                <!--UBold-->
+                <!--</a>-->
+                <!-- Image Logo -->
+                <a href="index.html" class="logo">
+                    helpDesk
+                </a>
+
+            </div>
+            <!-- End Logo container-->
+
+
+            <div class="menu-extras topbar-custom">
+
+                <ul class="list-inline float-right mb-0">
+
+                   
+                    <li class="list-inline-item dropdown notification-list">
+                        <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="false" aria-expanded="false">
+                            <img src="assets/images/user.png" alt="user" class="rounded-circle">
+                        </a> <span class="text-white">Welcome, {{username}}</span> 
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown "  aria-labelledby="Preview">
+                            <!-- item-->
+                         
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" (click)="logOut()" class="dropdown-item notify-item">
+                                <i class="zmdi zmdi-power"></i> <span>Logout</span>
+                            </a>
+
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- end menu-extras -->
+
+            <div class="clearfix"></div>
+
+        </div> <!-- end container -->
+    </div>

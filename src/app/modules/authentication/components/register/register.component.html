@@ -1,0 +1,97 @@
+
+      <div class="wrapper-page">
+        <div class="card-box" style="width:1000px; margin-left:-230px">
+            <div class="panel-heading">
+                <h3 class="text-center"> Sign Up to <strong>HelpDesk</strong> </h3>
+            </div>
+
+            <div class="p-20">
+                <form class="form-horizontal m-t-20"  (ngSubmit)="studentForm.valid  && onSubmit()" [formGroup]="studentForm">
+                   <div class="row">
+                       <div class="col-md-6">
+                            <div class="form-group-custom"  [ngClass]="{ 'has-error': studentForm.get('indexNumber').touched && !studentForm.get('indexNumber').valid}">
+                                    <label for="" class="form-label">Index Number</label>
+                                    <input type="email" id="user-email" placeholder="Enter index number" formControlName="indexNumber" name="indexNumber" class="form-control bg-light" />
+                                    <span *ngIf="studentForm.get('indexNumber').touched && !studentForm.get('indexNumber').valid" class="error" style="margin-left:160px"> Index Number  is required</span>
+                                </div>
+                       </div>
+                       <div class="col-md-6">
+                            <div class="form-group-custom"  [ngClass]="{ 'has-error': studentForm.get('name').touched && !studentForm.get('name').valid}">
+                                    <label for="" class="form-label">Name</label>
+                                    <input type="text" id="user-name" placeholder="Enter Name" required="required" formControlName="name" class="form-control bg-light" name="name"  autocomplete="off"/>
+                                    <span *ngIf="studentForm.get('name').touched && !studentForm.get('name').valid" class="error" style="margin-left:160px"> Name  is required</span>
+                                </div>
+                       </div>
+                   </div>
+                    
+
+                    
+                   <div class="row">
+                       <div class="col-md-6">
+                            <div class="form-group-custom"  [ngClass]="{ 'has-error': studentForm.get('email').touched && !studentForm.get('email').valid}">
+                                    <label for="" class="label-control">Email</label>
+                                    <input type="email" id="email" placeholder="Enter email" required="required"  class="form-control bg-light" formControlName="email" name="email"/>
+                                    <span *ngIf="studentForm.get('email').touched && !studentForm.get('email').valid" class="error" style="margin-left:160px"> Email  is required</span>
+                                </div>
+                       </div>
+                       <div class="col-md-6">
+                            <div class="form-group-custom"  [ngClass]="{ 'has-error': studentForm.get('phone').touched && !studentForm.get('phone').valid}">
+                                    <label for="" class="label-control">Phone</label>
+                                    <input type="phone" id="phone" placeholder="Enter phone" required="required"  class="form-control bg-light" formControlName="phone" name="phone"/>
+                                    <span *ngIf="studentForm.get('phone').touched && !studentForm.get('phone').valid" class="error" style="margin-left:160px"> Phone  is required</span>
+                                </div>
+                       </div>
+                   </div>
+                   
+
+                    
+
+                    <div class="form-group-custom"  [ngClass]="{ 'has-error': studentForm.get('gender').touched && !studentForm.get('gender').valid}">
+                            <label for="" class="label-control">Gender</label>
+                            <select class="form-control bg-light"
+                                id="gender" formControlName="gender" name="gender" >
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                            <span *ngIf="studentForm.get('gender').touched && !studentForm.get('gender').valid" class="error" style="margin-left:160px">gender is required</span>
+                        </div>
+<div class="row">
+    <div class="col-md-6">
+            <div class="form-group-custom"  [ngClass]="{ 'has-error': studentForm.get('password').touched && !studentForm.get('password').valid}">
+                    <label for="" class="form-label">Password</label>
+                    <input type="password" id="password" placholder="Enter password" required="required" formControlName="password" name="password" class="form-control bg-light"/>
+                    <span *ngIf="studentForm.get('password').touched && !studentForm.get('password').valid" class="error" style="margin-left:160px"> Field  is required</span>
+                </div>
+
+    </div>
+    <div class="col-md-6">
+            <div class="form-group-custom"  [ngClass]="{ 'has-error': studentForm.get('confirmPassword').touched && !studentForm.get('confirmPassword').valid}">
+                    <label for="" class="form-label">Confirm Password</label>
+                <input type="password" id="confirmPassword" placholder="Enter password" required="required" formControlName="confirmPassword" name="confirmPassword" class="form-control bg-light"/>
+                    <span *ngIf="studentForm.get('confirmPassword').touched && !studentForm.get('confirmPassword').valid" class="error" style="margin-left:160px"> Field  is required</span>
+                </div>
+    </div>
+</div>
+                    
+                    <div class="form-group text-center m-t-40">
+                        <div class="col-12">
+                            <button class="btn btn-success btn-block text-uppercase waves-effect waves-light" type="submit">
+                                Register
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+                <div class="row">
+                        <div class="col-12 text-center">
+                            <p class="">
+                                Already have account?   <a routerLink="/login" ><b>Sign In</b></a>
+                            </p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+       
+
+    </div>
